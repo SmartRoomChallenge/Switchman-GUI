@@ -1,26 +1,48 @@
 require('switchman')();
 
-// Create a new window and get it
-nw.Window.open('http://localhost:3000/devices', {
-  "position": "center",
-  "title": "Switchman",
-  "width": 500
-}, function(win) {
-  // And listen to new window's focus event
-  win.on('loaded', function() {
-    console.error('Loaded');
-    win.showDevTools();
-  });
+//Application Window
+var openWindow = (function (){
+  var window = null
 
-  console.log('Test');
+  return function(){
+    if(window==null){
+      alert("light");
+      nw.Window.open('http://localhost:3000/devices', {
+        "position": "center",
+        "title": "Switchman",
+        "width": 500
+      }, function(win) {
+        window = win;
+        // And listen to new window's focus event
+        win.on('loaded', function() {
+          //Show Dev Tools for Debugging
+          win.showDevTools();
+        });
+        win.on('close', function() {
+          // Hide the window
 
-});
+          win.hide();
+        });
 
-// Create a tray icon
-var tray = new nw.Tray({ title: 'Tray', icon: 'public/images/favicon.ico' });
+      });
+    }
+    else{
+      window.show();
+    }
+  }
+})();
 
-// Give it a menu
+openWindow();
+
+//Application Tray
+var tray = new nw.Tray({ title: 'Switchman', icon: 'assets/images/favicon.ico' });
+
+//Application Menu
 var menu = new nw.Menu();
-menu.append(new nw.MenuItem({ label: 'Application' }));
-menu.append(new nw.MenuItem({ label: 'Exit' }));
+var uApp = new nw.MenuItem({ label: 'Application' });
+uApp.click = function() { openWindow(); };
+var uExit = new nw.MenuItem({ label: 'Exit' });
+uExit.click = function() { nw.App.quit(); };
+menu.append(uApp);
+menu.append(uExit);
 tray.menu = menu;
