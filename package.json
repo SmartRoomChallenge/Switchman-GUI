@@ -1,0 +1,13 @@
+{
+  "name": "Switchman-GUI",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nw --remote-debugging-port=9222 --enable-logging=stdout"
+  },
+  "main": "app.js",
+  "dependencies": {
+    "nw": "0.14.5-sdk",
+    "switchman": "SmartRoomChallenge/Switchman"
+  }
+}
