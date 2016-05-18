@@ -3,24 +3,17 @@ require('switchman')();
 //Application Window
 var openWindow = (function (){
   var window = null
-
   return function(){
     if(window==null){
-      alert("light");
-      nw.Window.open('http://localhost:3000/devices', {
+      nw.Window.open('http://localhost:3000/views', {
         "position": "center",
         "title": "Switchman",
-        "width": 500
+        "width": 1000,
+        "height": 500,
       }, function(win) {
         window = win;
-        // And listen to new window's focus event
-        win.on('loaded', function() {
-          //Show Dev Tools for Debugging
-          win.showDevTools();
-        });
         win.on('close', function() {
           // Hide the window
-
           win.hide();
         });
 
