@@ -8,6 +8,7 @@ var openWindow = (function (){
       nw.Window.open('http://localhost:3000/views', {
         "position": "center",
         "title": "Switchman",
+        "icon": "assets/images/icons/icon-128px.png",
         "width": 1000,
         "height": 500,
       }, function(win) {
@@ -28,7 +29,7 @@ var openWindow = (function (){
 openWindow();
 
 //Application Tray
-var tray = new nw.Tray({ title: 'Switchman', icon: 'assets/images/favicon.ico' });
+var tray = new nw.Tray({ title: 'Switchman', icon: 'assets/images/icons/icon-128px.png' });
 
 //Application Menu
 var menu = new nw.Menu();
